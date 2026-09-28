@@ -1,0 +1,726 @@
+=== PAGE 1 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 1
+ KONE ELEVATE — RESEARCH DOCUMENTATION
+ KONE Elevate — Complete
+Five-Subsystem Fault Dictionary
+ Drive / Motor · Door System · Brake / Traction
+Controller / Safety-Circuit · Sensors / Instrumentation
+ Reference taxonomy for the Autonomous Fault Isolation
+ and Root Cause Analysis knowledge base
+ Team RiseForge · KONE Elevate Hackathon
+
+
+=== PAGE 2 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 2
+Document Overview
+This dictionary organizes elevator diagnostic knowledge into five subsystems. Each subsystem lists
+components, sensors/observable data, failure modes, and signal-to-root-cause mappings. These are candidate
+hypotheses for the RCA engine — not confirmed diagnoses. Live reasoning must evaluate correlated evidence
+before promoting any candidate to a diagnosis.
+Subsystem
+Scope
+1. Drive / Motor
+Power conversion, drive, motor, motion generation
+2. Door System
+Door operator, sensors, lock/interlock, cycle mechanics
+3. Brake / Traction
+Brake, sheave, ropes/belts, governor, safety gear
+4. Controller / Safety-Circuit
+PLC, I/O, safety chain, relays, event logging
+5. Sensors / Instrumentation
+Measurement layer providing RCA evidence
+RCA Principle
+Overcurrent is a symptom, not a root cause. The same fault code can have multiple upstream causes. The
+RCA engine needs correlated evidence across subsystems, not a simple lookup.
+
+
+=== PAGE 3 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 3
+1. DRIVE / MOTOR
+This subsystem covers the electrical power conversion, drive, motor, and motion-generation chain. Relevant
+components include the VFD/VVVF, DC bus, inverter, PWM/IGBT stage, gate drivers, current/voltage sensing,
+regenerative braking, PMSM, encoder feedback, motor current and motor temperature.
+ Fundamental motion chain: motor → drive → traction sheave → ropes/belts
+Components / Devices / Equipment
+  Traction motor
+ Braking resistor
+ PMSM — Permanent Magnet Synchronous Motor
+ Motor current sensors
+ Motor stator
+ Drive voltage sensors
+ Motor rotor
+ DC-bus voltage sensing
+ VFD / VVVF drive
+ Drive temperature sensing
+ AC input stage
+ Motor temperature sensing
+ Rectifier
+ Motor encoder / feedback interface
+ DC bus
+ Motor-control electronics
+ DC-link capacitors
+ Torque-control circuitry
+ Inverter stage
+ Speed-control circuitry
+ IGBT power modules
+ Regenerative-braking circuitry
+ IGBT gate drivers
+ Motor cables
+ PWM switching circuitry
+ Power cables
+ Braking chopper
+ Electrical terminals/connections
+Sensors / Observable Data
+  Phase current
+ Power-quality measurements
+ Motor current
+ Vibration
+ Motor voltage
+ Acceleration
+ DC-bus voltage
+ Overcurrent alarm
+ Drive temperature
+ Overvoltage alarm
+ Motor temperature
+ Undervoltage alarm
+ Motor speed
+ Overload alarm
+ Encoder feedback
+ Drive fault code
+ Torque
+ Motor fault indication
+Possible Failure Modes
+ 1. IGBT short circuit
+2. IGBT thermal degradation
+3. DC-bus overvoltage
+4. DC-bus undervoltage
+5. DC-link capacitor degradation
+6. Motor overcurrent
+7. Motor overload
+8. Motor winding phase-to-phase fault
+9. Motor winding ground fault
+10. Motor insulation degradation
+11. Mechanical jam
+12. Seized bearing
+13. Excessive mechanical load
+14. Incorrect motor parameters
+15. Drive/inverter failure
+16. Gate-driver fault
+
+
+=== PAGE 4 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 4
+17. Current-sensor fault
+18. Voltage-sensor fault
+19. Regenerative-braking abnormality
+20. Motor overheating
+21. Encoder feedback problem
+22. Motor cable fault
+23. Power-supply disturbance
+Key RCA Insight
+Overcurrent is a symptom rather than a root cause. It can originate from mechanical binding, motor/cable
+electrical faults, an internal IGBT failure, or incorrect VFD parameters.
+Observable Signals → Plausible Root Causes
+Observable Signal
+Possible Root Cause
+Sudden very high motor current
+Mechanical jam / seized bearing
+Sudden overcurrent + drive fault
+IGBT failure, winding fault, mechanical jam
+Repeated IGBT temperature spikes
+Thermal stress / cooling problem
+High DC-bus voltage during deceleration
+Regenerative-energy problem
+DC-bus voltage instability
+DC-link capacitor degradation / power issue
+Phase-current imbalance
+Motor winding fault / cable fault / drive fault
+High current with mechanical binding
+Seized bearing / mechanical obstruction
+High current without corresponding mechanical load
+Electrical motor fault / IGBT fault
+Motor temperature gradually increasing
+Overload / cooling degradation / bearing friction
+Drive faults even when motor-side is isolated
+Internal drive / IGBT fault
+Abnormal current waveform
+Motor winding / rotor / bearing / drive problem
+Motor speed deviation
+Encoder / drive / motor-control problem
+Overcurrent + brake timing violation
+Brake/mechanical-load problem (not necessarily electrical)
+The last example is critical: the same fault code can have multiple upstream causes — which is why the RCA engine
+needs correlated evidence rather than a simple lookup.
+
+
+=== PAGE 5 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 5
+2. DOOR SYSTEM
+The door system is a major diagnostic subsystem. Relevant components include the door operator, door motor,
+belt, rollers, tracks, lock/interlock, photo-eye, light curtain, safety edge, encoder, and door-position/limit sensing.
+Components / Devices / Equipment
+  Door operator
+ Photo-eye
+ Door motor
+ Light curtain
+ Door drive/controller
+ Safety edge
+ Door belt
+ Door encoder
+ Door chain (where applicable)
+ Open-position limit sensor
+ Door rollers
+ Close-position limit sensor
+ Door bearings
+ Door-zone sensing
+ Door tracks
+ Door-position sensing
+ Door panels
+ Door motor/current sensing
+ Door lock
+ Door-control electronics
+ Door-lock contacts
+ Door wiring/connectors
+ Door interlock
+Sensors / Observable Data
+  Door position
+ Interlock state
+ Door opening time
+ Photo-eye state
+ Door closing time
+ Light-curtain state
+ Door-cycle duration
+ Safety-edge state
+ Door motor current
+ Open-limit state
+ Door motor load
+ Close-limit state
+ Door encoder position
+ Number of reopening events
+ Door encoder speed
+ Door timeout
+ Door-lock state
+ Door fault alarm
+Possible Failure Modes
+ 1. Roller wear
+2. Roller bearing wear
+3. Belt wear/stretch
+4. Track misalignment
+5. Door mechanical obstruction
+6. Door motor degradation
+7. Door encoder drift
+8. Door encoder failure
+9. Photo-eye contamination
+10. Photo-eye misalignment
+11. Light-curtain degradation
+12. Safety-edge fault
+13. Door-lock contact contamination
+14. Door-lock contact pitting/wear
+15. Door interlock fault
+16. Open-limit sensor fault
+17. Close-limit sensor fault
+18. Door wiring/connector fault
+19. Door-control electronics fault
+20. Excessive door closing force
+
+
+=== PAGE 6 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 6
+21. Door-cycle-time degradation
+Observable Signals → Plausible Root Causes
+Observable Signal
+Plausible Root Cause
+Increasing door-cycle time
+Roller/bearing wear
+Increasing door motor current
+Roller friction / belt wear / mechanical obstruction
+Slow or noisy door movement
+Roller/track/belt degradation
+Repeated door reopening
+Photo-eye / light-curtain / obstruction
+Reopening despite no physical obstruction
+Sensor drift / contamination
+Unstable "door closed" signal
+Door-lock contact contamination/pitting
+Door-lock failure alarm
+Lock/interlock problem
+Position deviation
+Door encoder drift
+Door stops before fully opening
+Open-limit / encoder / operator problem
+Door stops before fully closing
+Close-limit / lock / sensor problem
+Door timeout
+Mechanical wear / motor degradation / obstruction
+Door current increasing over many cycles
+Progressive mechanical wear
+Intermittent door fault
+Wiring / contact / encoder degradation
+Documented Causal Chains
+  Roller wear → slow/noisy door → increased current → door timeout
+ Photo-eye drift → reopening → abnormal sensor state → door fault
+ Encoder drift → incorrect position → position deviation → encoder fault
+ Lock-contact problem → repeated reopening → unstable lock state → door-lock fault
+
+
+=== PAGE 7 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 7
+3. BRAKE / TRACTION
+This combined subsystem covers the braking mechanism, traction sheave, ropes/belts, rope tension, and
+traction-related safety mechanisms: electromechanical brake, brake coil, brake wear, torque, timing,
+monitoring/self-test, steel ropes/coated belts, traction sheave, rope tension/wear, sheave wear, rope slip,
+counterweight imbalance, overspeed governor, safety gear, UCMP/UCM, ACOP, and buffers.
+Components — Brake
+  Electromechanical brake
+ Brake coil
+ Brake armature/linkage
+ Brake friction surfaces/lining
+ Brake monitoring mechanism
+ Brake self-test mechanism
+ Brake torque mechanism
+Components — Traction
+  Traction sheave
+ Steel suspension ropes
+ Coated belts (where applicable)
+ Rope termination
+ Rope tensioning system
+ Counterweight
+ Counterweight-related mechanical load
+ Machine/traction assembly
+Components — Safety-Related
+  Overspeed governor
+ Governor rope
+ Safety gear
+ UCMP/UCM protection
+ ACOP-related protection
+ Buffers
+Sensors / Observable Data
+  Brake timing
+ Car speed
+ Brake release timing
+ Position
+ Brake application timing
+ Vibration
+ Brake torque
+ Acceleration
+ Brake self-test result
+ Unexpected movement
+ Rope tension
+ Overspeed condition
+ Rope condition
+ UCM/UCMP event
+ Wire-break indicators/count
+ Brake fault alarm
+ Traction slip
+ Rope-condition alarm
+ Motor speed
+Possible Failure Modes
+ 1. Brake torque below specification
+2. Brake-torque miscalibration
+3. Brake wear
+4. Brake friction degradation
+5. Brake coil problem
+
+
+=== PAGE 8 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 8
+6. Brake-release timing problem
+7. Brake-application timing problem
+8. Brake monitoring fault
+9. Brake self-test failure
+10. Rope wear
+11. Broken wire strands
+12. Rope corrosion
+13. Rope diameter degradation
+14. Unequal rope tension
+15. Rope slip
+16. Traction loss
+17. Traction-sheave wear
+18. Sheave contamination
+19. Counterweight imbalance
+20. Overspeed condition
+21. UCM/UCMP event
+22. Governor-related fault
+23. Safety-gear activation
+24. Buffer-related abnormality
+Observable Signals → Plausible Root Causes
+Observable Signal
+Plausible Root Cause
+Brake timing violation
+Brake mechanism / timing problem
+Brake slip
+Insufficient brake torque
+Unexpected car movement
+Brake / traction problem
+Holding fault
+Insufficient brake torque / brake wear
+Brake torque below expected value
+Brake wear / adjustment / calibration
+Increasing rope vibration
+Rope degradation / traction problem
+Rope-condition alarm
+Rope wear / corrosion / broken wires
+Increasing wire-break count
+Rope degradation
+Slip under load
+Sheave wear / insufficient traction / rope tension issue
+Speed deviation under load
+Traction slip
+Unequal rope tension
+Rope / tensioning problem
+Excessive vibration
+Sheave / rope / traction degradation
+Overspeed event
+Overspeed protection / drive / traction abnormality
+UCM/UCMP event
+Unexpected car movement requiring safety response
+Motor current ↑ while brake not fully released
+Brake drag / mechanical resistance
+Cross-Subsystem RCA Distinction
+A motor can appear abnormal because the brake/traction subsystem is imposing excessive mechanical
+load. That is exactly the kind of cross-subsystem reasoning this project is designed to perform.
+
+
+=== PAGE 9 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 9
+4. CONTROLLER / SAFETY-CIRCUIT
+This subsystem covers the decision/control electronics and the independent safety chain: PLC/controller, main
+control board, I/O modules, safety controller, drive interface, communication buses, event logging, fault-code
+generation, and state-machine logic.
+Components — Controller
+  Elevator PLC/controller
+ Drive interface
+ Main control board
+ Communication interfaces/buses
+ CPU/control processor
+ Controller power supply
+ I/O modules
+ Control wiring
+ Digital inputs
+ Relays
+ Digital outputs
+ Contactors
+ Analog inputs
+ Relay coils
+ Analog outputs (where applicable)
+ Terminal blocks/connectors
+ Safety controller
+Components — Safety Circuit
+  Safety chain
+ Door interlock contacts
+ Governor safety contacts
+ Emergency-stop contacts
+ Final-limit/safety contacts (where applicable)
+ Safety relays
+ Safety contactors
+ Safety controller/interface
+ Hardwired safety path
+Sensors / Observable Data
+  Safety-chain state
+ Controller event logs
+ Door-interlock state
+ Fault logs
+ Emergency-stop state
+ Fault codes
+ Governor state
+ Warning codes
+ Relay state
+ Hard-fault status
+ Contactor state
+ Soft-fault status
+ Controller state
+ Reset events
+ I/O state
+ State-machine transitions
+ Communication status
+ Drive communication status
+Possible Failure Modes
+ 1. Safety-chain open
+2. Door-interlock contact open
+3. Governor contact open
+4. Emergency-stop activated
+5. Final-limit contact open
+6. Relay-coil degradation
+7. Contact contamination
+8. Contact pitting/wear
+9. Loose terminal/wiring
+10. Controller I/O failure
+11. Controller main-board fault
+
+
+=== PAGE 10 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 10
+12. PLC logic fault
+13. Communication fault
+14. Drive-controller communication failure
+15. Controller power-supply problem
+16. Firmware/software issue
+17. I/O module failure
+18. Intermittent controller fault
+19. State-machine/logic abnormality
+20. False/intermittent safety-chain indication
+Observable Signals → Plausible Root Causes
+Observable Signal
+Plausible Root Cause
+Safety circuit open
+Open safety contact
+Elevator immediately held out of service
+Safety-chain interruption
+Door interlock open
+Door-lock / interlock problem
+Governor contact open
+Governor / safety event
+Emergency-stop active
+Emergency-stop activation
+Intermittent safety fault
+Relay / contact degradation
+Repeated reset required
+Intermittent contact / relay problem
+Multiple unexplained alarms
+Controller / I/O / communication problem
+Erratic I/O behavior
+I/O module or wiring fault
+Communication loss with drive
+Communication / interface fault
+Controller reboot
+Power-supply / control-board problem
+Fault appears/disappears intermittently
+Relay / contact / wiring degradation
+Controller reports several dependent alarms
+Primary controller/safety event causing downstream alarms
+Hard fault remains after reset
+Persistent safety-chain / component failure
+Safety Boundary (Non-Negotiable)
+The AI is not part of the physical safety-control loop. The elevator's hardwired safety chain remains
+responsible for safety-critical stopping behavior; the AI diagnoses and explains what happened. This
+distinction must remain explicit in the architecture.
+
+
+=== PAGE 11 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 11
+5. SENSORS / INSTRUMENTATION
+This is the broad measurement and telemetry layer that provides evidence to the RCA engine. It covers electrical,
+mechanical, positional, door, environmental, and operational measurements.
+Electrical
+  Motor-current sensor
+ Phase-current sensors
+ Motor-voltage sensing
+ DC-bus-voltage sensor
+ Drive-voltage sensing
+ Power-quality measurement
+ Drive-temperature sensor
+ Motor-temperature sensor
+Mechanical
+  Vibration sensor
+ Accelerometer
+ Brake-torque measurement
+ Rope-tension measurement
+ Motor-speed measurement
+Position / Motion
+  Rotary encoder
+ Absolute encoder
+ Position sensor
+ Car-position sensing
+ Floor-leveling sensor
+ Door encoder
+ Door-position sensor
+Door
+  Door-position sensor
+ Door-cycle timer/data
+ Door-motor-current sensing
+ Door-lock-state sensing
+ Photo-eye
+ Light curtain
+ Safety-edge sensing
+ Open/close limit sensors
+Environment
+  Machine-room temperature sensor
+ Humidity sensor
+ Ambient-temperature measurement
+Operational
+  Load sensor / load cell
+ Passenger-count information
+ Trip count
+ Start/stop count
+ Travel distance
+
+
+=== PAGE 12 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 12
+ Door-cycle count
+ Running hours
+ Mileage
+ Drive time
+ Stopping accuracy
+Sensor Failure Modes
+Encoder / position: drift, failure, pulse loss, signal noise, misalignment, incorrect position feedback, leveling
+error
+Load sensor: drift, calibration error, incorrect load reading, mechanical mounting problem, wiring fault
+Current sensor: calibration drift, failure, signal noise, offset error, saturation
+Voltage sensor: calibration error, signal loss, noise, incorrect voltage measurement
+Vibration sensor: mounting problem, noise, degradation, incorrect sampling
+Temperature sensor: drift, failure, wiring fault, environmental interference
+Door sensors: photo-eye contamination/misalignment, light-curtain failure, door-lock-state inconsistency,
+limit-sensor failure, door encoder drift
+Observable Signals → Plausible Root Causes
+Sensor Signal
+Possible Root Cause
+Floor-leveling error
+Encoder / position-sensor fault
+Missed floor
+Encoder / position problem
+Emergency stop mid-travel
+Position / safety-related abnormality
+Incorrect load reading
+Load-sensor calibration / drift
+Nuisance overload alarm
+Load-sensor miscalibration
+Spurious alarms
+Wiring / sensor fault / noise
+Inconsistent sensor readings
+Sensor degradation / noise
+High vibration
+Bearing / traction / rope / mechanical problem
+Rising temperature
+Overload / friction / electrical degradation
+Noisy current signal
+Current-sensor / wiring / electrical issue
+Position deviation
+Encoder drift / failure
+Unstable door-lock state
+Lock sensor / contact problem
+Abnormal photo-eye state
+Contamination / misalignment
+Unexpected door obstruction signal
+Photo-eye / light-curtain / safety-edge issue
+Representative chains: encoder/pulse-generator drift → floor-leveling errors/missed stops; load-sensor
+miscalibration → inconsistent load readings.
+
+
+=== PAGE 13 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 13
+Putting Everything Together
+The complete diagnostic model the RCA Agent can reason over spans five interconnected subsystems. They are
+not isolated silos — the research specifically requires correlation across subsystems.
+ELEVATOR
+■
+■■■ 1. DRIVE / MOTOR
+■   ■■■ Motor / PMSM, VFD/VVVF, IGBT/inverter, DC bus, gate drivers
+■   ■■■ Braking chopper/resistor, motor cables, electrical sensing
+■   ■■■ Evidence: current, voltage, DC bus, temperature, speed, vibration, encoder, alarms
+■   ■■■ Failures: IGBT fault, jam, winding fault, overload, overcurrent, overvoltage, overheating
+■
+■■■ 2. DOOR SYSTEM
+■   ■■■ Door motor/operator, belt, rollers/bearings, tracks, lock/interlock
+■   ■■■ Photo-eye, light curtain, safety edge, encoder, limit sensors
+■   ■■■ Evidence: door current, cycle time, position, lock state, photo-eye, encoder
+■   ■■■ Failures: wear, obstruction, sensor drift, lock fault, encoder fault, belt fault
+■
+■■■ 3. BRAKE / TRACTION
+■   ■■■ Brake, brake coil, monitoring; traction sheave, ropes/belts, tension
+■   ■■■ Counterweight, governor, safety gear, buffers
+■   ■■■ Evidence: brake timing/torque, rope condition, tension, speed, slip, vibration, UCM
+■   ■■■ Failures: brake wear, low torque, timing fault, rope degradation, slip, sheave wear
+■
+■■■ 4. CONTROLLER / SAFETY-CIRCUIT
+■   ■■■ PLC/controller, main board, I/O, safety controller, relays, contactors
+■   ■■■ Door interlocks, governor contacts, emergency stop, safety chain
+■   ■■■ Evidence: event logs, fault codes, I/O states, safety-chain state, communication
+■   ■■■ Failures: open safety chain, relay degradation, contact fault, I/O/comm/controller fault
+■
+■■■ 5. SENSORS / INSTRUMENTATION
+    ■■■ Current/voltage/temperature/vibration sensors; encoders; position/leveling
+    ■■■ Load sensors, door sensors, photo-eye/light curtain, environmental
+    ■■■ Evidence: current, voltage, temperature, vibration, position, load, door state
+    ■■■ Failures: drift, noise, calibration error, signal loss, sensor failure, misalignment
+
+
+=== PAGE 14 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 14
+Cross-Subsystem Correlation Examples
+These examples show why alarm correlation before RCA matters: multiple alarms can be consequences of one
+underlying fault.
+Example 1 — Drive vs Brake
+Motor Current ↑ + Brake Timing Violation + Speed Deviation
+RCA considers three hypotheses:
+  Drive / Motor fault
+ Brake fault
+ Mechanical load problem
+The system must use available evidence to distinguish hypotheses — not simply conclude "overcurrent = motor
+fault."
+Example 2 — Door + Controller
+Door Closed Signal Unstable + Door Reopening + Safety Chain Open
+Possible single causal chain:
+ Door-lock contact degradation
+→ Interlock opens
+→ Safety chain opens
+→ Controller generates hard fault
+What looks like multiple faults may actually be one causal chain.
+Example 3 — Sensor → Controller → Motion
+ Encoder Signal Abnormal
+→ Position Deviation
+→ Leveling Error
+→ Controller Fault / Stop Event
+→ RCA traces back toward Encoder / Position Sensing
+Recommended Knowledge-Base Hierarchy
+For implementation, structure the knowledge base as:
+Subsystem → Component → Failure Mode → Observable Signal → Evidence Pattern → Plausible Root
+Cause → Verification Test → Corrective Action
+Example — Drive / Motor
+ DRIVE / MOTOR
+→ IGBT Power Module
+→ IGBT Short Circuit
+→ Overcurrent + drive fault
+→ High current + abnormal DC-bus behavior
+→ IGBT failure (candidate)
+→ Verify drive fault with motor-side isolation/test procedure
+→ Technician repair/replacement
+Example — Door System
+ DOOR SYSTEM
+→ Roller / Bearing
+→ Mechanical Wear
+→ Door-cycle time ↑ + motor current ↑
+
+
+=== PAGE 15 ===
+KONE Elevate
+Five-Subsystem Fault Dictionary
+Page 15
+→ Progressive degradation over multiple cycles
+→ Worn roller/bearing (candidate)
+→ Technician mechanical inspection
+→ Roller/bearing replacement
+Taxonomy vs Diagnosis
+The "plausible root causes" in this dictionary are candidate hypotheses. The live RCA pipeline should only
+promote one to a diagnosis after evaluating the available evidence. Project documentation explicitly requires
+evidence-linked reasoning rather than an LLM simply guessing the cause.
+
+
