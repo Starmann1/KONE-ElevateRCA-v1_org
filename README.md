@@ -133,3 +133,15 @@ Open **`http://127.0.0.1:8000`** in your browser to access the live glassmorphic
 - [`docs/RAG_RETRIEVAL_EVALUATION.md`](docs/RAG_RETRIEVAL_EVALUATION.md) — Precision benchmarks, configuration filtering tests, and ground-truth preservation.
 - [`docs/TECHNICIAN_DIAGNOSTIC_LOOP.md`](docs/TECHNICIAN_DIAGNOSTIC_LOOP.md) — Human review protocol, confirmation tests, and observation interpretation.
 - [`docs/IMPLEMENTATION_STATUS.md`](docs/IMPLEMENTATION_STATUS.md) — Master completion matrix and 25-test verification report.
+
+---
+
+## 👥 Authors & Attribution
+
+* **Project**: KONE Elevate — Autonomous Fault Isolation & Bayesian RCA (ElevateRCA)
+* **Developer**: **Arul Amudhan G & Sanjay Krshna G**
+* **Organization**: Rajalakshmi Engineering College
+* **Hackathon**: KONE Elevate 2026
+* **Repository**: [https://github.com/Starmann1/ElevateRCA.git](https://github.com/Starmann1/KONE-ElevateRCA-v1_org.git)
+
+---
